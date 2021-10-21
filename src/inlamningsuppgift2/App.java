@@ -2,6 +2,8 @@ package inlamningsuppgift2;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class App extends JFrame {
     JPanel gameBoardPanel = new JPanel();
@@ -19,8 +21,27 @@ public class App extends JFrame {
         resetButton.setFont(new Font(Config.fontType, Font.BOLD, Config.fontSize));
         this.add("North", resetButton);
 
+        gameBoardPanel.setMaximumSize(new Dimension(600, 600));
+        this.add("Center", gameBoardPanel);
+        gameBoardPanel.setLayout(new GridLayout(4,4));
+        initiateTiles();
+
         setVisible(true);
 
+    }
+
+    private void initiateTiles(){
+        ArrayList<Integer> list = new ArrayList<>();
+        for(int j = 1 ; j < 16 ; j++) {
+            list.add(j);
+        }
+        Collections.shuffle(list);
+        for(int i = 0; i < list.size(); i++){
+            System.out.println(list.get(i));
+            Tile tile = new Tile(list.get(i));
+            tile.setSize(new Dimension(150, 150));
+            gameBoardPanel.add(new Tile(i));
+        }
     }
 
 }
