@@ -19,6 +19,10 @@ public class App extends JFrame {
         resetButton.setMaximumSize(new Dimension(600,100));
         resetButton.setText("Reset");
         resetButton.setFont(new Font(Config.fontType, Font.BOLD, Config.fontSize));
+        resetButton.addActionListener(event -> {
+            initiateTiles();
+            gameBoardPanel.revalidate();
+        });
         this.add("North", resetButton);
 
         gameBoardPanel.setMaximumSize(new Dimension(600, 600));
@@ -27,20 +31,19 @@ public class App extends JFrame {
         initiateTiles();
 
         setVisible(true);
-
     }
 
     private void initiateTiles(){
+        gameBoardPanel.removeAll();
         ArrayList<Integer> list = new ArrayList<>();
         for(int j = 1 ; j < 16 ; j++) {
             list.add(j);
         }
         Collections.shuffle(list);
         for(int i = 0; i < list.size(); i++){
-            System.out.println(list.get(i));
             Tile tile = new Tile(list.get(i));
             tile.setSize(new Dimension(150, 150));
-            gameBoardPanel.add(new Tile(i));
+            gameBoardPanel.add(tile);
         }
     }
 
