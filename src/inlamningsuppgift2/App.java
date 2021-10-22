@@ -10,7 +10,7 @@ public class App extends JFrame {
     App() {
         System.out.println("Start the application!");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setMinimumSize(new Dimension(600, 700));
+        setMinimumSize(new Dimension(Config.appWidth, Config.appHeight));
         setLocation(200, 100);
 
         resetButton.addActionListener(event -> {
