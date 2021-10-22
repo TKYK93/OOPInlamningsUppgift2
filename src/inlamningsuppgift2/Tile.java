@@ -28,13 +28,21 @@ public class Tile extends JButton implements ActionListener {
         return xPos;
     }
 
+    public void setXPos(int xPos) {
+        this.xPos = xPos;
+    }
+
     public int getYPos() {
         return yPos;
     }
 
+    public void setYPos(int yPos) {
+        this.yPos = yPos;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("x : " + getXPos() + ", y : " + getYPos());
+        System.out.println("x = " + xPos + ", y = " + yPos);
     }
 
 }
