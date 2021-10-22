@@ -11,7 +11,7 @@ public class App extends JFrame {
         System.out.println("Start the application!");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setMinimumSize(new Dimension(Config.appWidth, Config.appHeight));
-        setLocation(200, 100);
+        setLocationRelativeTo(null);
 
         resetButton.addActionListener(event -> {
             resetTiles();
