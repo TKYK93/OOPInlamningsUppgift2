@@ -4,8 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class App extends JFrame {
-    GameBoard gameBoardPanel = new GameBoard();
-    ResetButton resetButton = new ResetButton();
+    private int rows = 4;
+    private int columns = 4;
+    private GameBoard gameBoardPanel = new GameBoard();
+    private ResetButton resetButton = new ResetButton();
+
 
     App() {
         System.out.println("Start the application!");
@@ -25,7 +28,7 @@ public class App extends JFrame {
     }
 
     private void resetTiles(){
-        gameBoardPanel.setLayout(new GridLayout(4,4));
+        gameBoardPanel.setLayout(new GridLayout(rows, columns));
         gameBoardPanel.initializeTiles();
     }
 

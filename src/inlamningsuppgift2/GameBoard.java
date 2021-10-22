@@ -7,25 +7,27 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class GameBoard extends JPanel {
-    private Tile[][] tiles = new Tile[4][4];
+    private int rows = 4;
+    private int columns = 4;
+    private Tile[][] tiles = new Tile[rows][columns];
 
     GameBoard() {
         setMaximumSize(new Dimension(Config.gameBoardWidth, Config.gameBoardHeight));
-        setLayout(new GridLayout(4,4));
-        // ----- For test only -----------
+        setLayout(new GridLayout(rows,columns));
+        // ----- For test only in case of 4 x 4 -----------
         testForGameClearFuncInitialize();
         // -------------------------------
 //        initializeTiles();
     }
 
-    // For test only
+    // For test only in case of 4 x 4
     public void testForGameClearFuncInitialize() {
         ArrayList<Integer> listTest = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 15));
-        for(int i = 0; i < 4; i++) {
-            for(int j = 0; j < 4; j++) {
+        for(int i = 0; i < rows; i++) {
+            for(int j = 0; j < columns; j++) {
                 int tileNumber = listTest.remove(0);
                 Tile currentTile = new Tile(tileNumber, j, i);
-                if(tileNumber == 16){
+                if(tileNumber == rows * columns){
                     currentTile.setBackground(new Color(223,212,202));
                     currentTile.setText("");
                 }
@@ -48,18 +50,18 @@ public class GameBoard extends JPanel {
 
         // create a random order array
         ArrayList<Integer> list = new ArrayList<>();
-        for(int j = 1 ; j < 16 ; j++) {
+        for(int j = 1 ; j < rows*columns ; j++) {
             list.add(j);
         }
         Collections.shuffle(list);
 
-        for(int i = 0; i < 4; i++) {
-            for(int j = 0; j < 4; j++){
-                if(i == 3 && j == 3){
-                    Tile emptyTile = new Tile(16, 3, 3);
+        for(int i = 0; i < rows; i++) {
+            for(int j = 0; j < columns; j++){
+                if(i == rows-1 && j == columns-1){
+                    Tile emptyTile = new Tile(rows*columns, 3, 3);
                     emptyTile.setText("");
                     emptyTile.setBackground(new Color(223,212,202));
-                    tiles[3][3] = emptyTile;
+                    tiles[rows-1][columns-1] = emptyTile;
                     add(emptyTile);
                     break;
                 }
@@ -81,8 +83,8 @@ public class GameBoard extends JPanel {
 
     private void setTilesFromList(){
         removeAll();
-        for(int i = 0; i < 4; i++) {
-            for(int j = 0; j < 4; j++) {
+        for(int i = 0; i < rows; i++) {
+            for(int j = 0; j < columns; j++) {
                 add(tiles[i][j]);
             }
         }
@@ -90,9 +92,9 @@ public class GameBoard extends JPanel {
     }
 
     public Tile getEmptyTile(){
-        for(int i = 0; i < 4 ; i++){
-            for(int j = 0; j < 4;j++){
-                if(tiles[i][j].getNumber() == 16){
+        for(int i = 0; i < rows ; i++){
+            for(int j = 0; j < columns;j++){
+                if(tiles[i][j].getNumber() == rows * columns){
                     return tiles[i][j];
                 }
             }
@@ -144,13 +146,13 @@ public class GameBoard extends JPanel {
             int emptyTileY = emptyTile.getYPos();
             int tileX = tile.getXPos();
             int tileY = tile.getYPos();
-            for(int i = 0; i < 4; i++){
-                for(int j = 0; j < 4; j++){
+            for(int i = 0; i < rows; i++){
+                for(int j = 0; j < columns; j++){
                     if(tiles[i][j].getNumber() == tile.getNumber()){
                         emptyTile.setXPos(tileX);
                         emptyTile.setYPos(tileY);
                         tiles[i][j] = emptyTile;
-                    } else if(tiles[i][j].getNumber() == 16){
+                    } else if(tiles[i][j].getNumber() == rows*columns){
                         tile.setXPos(emptyTileX);
                         tile.setYPos(emptyTileY);
                         tiles[i][j] = tile;
@@ -164,18 +166,14 @@ public class GameBoard extends JPanel {
     }
 
     public boolean checkIsGameDone () {
-        int[][] correctTiles = {
-                {1, 2, 3, 4},
-                {5, 6, 7, 8},
-                {9, 10, 11, 12},
-                {13, 14, 15, 16}
-                };
+        int correctNumber = 1;
 
-        for(int i = 0; i < 4; i++){
-            for(int j = 0; j < 4; j++){
-                if(tiles[i][j].getNumber() != correctTiles[i][j]){
+        for(int i = 0; i < rows; i++){
+            for(int j = 0; j < columns; j++){
+                if(tiles[i][j].getNumber() != correctNumber){
                     return false;
                 }
+                correctNumber++;
             }
         }
         return true;
