@@ -10,7 +10,7 @@ public class GameBoard extends JPanel {
     private Tile[][] tiles = new Tile[4][4];
 
     GameBoard() {
-        setMaximumSize(new Dimension(600, 600));
+        setMaximumSize(new Dimension(Config.gameBoardWidth, Config.gameBoardHeight));
         setLayout(new GridLayout(4,4));
         // ----- For test only -----------
         testForGameClearFuncInitialize();

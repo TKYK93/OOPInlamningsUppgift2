@@ -9,7 +9,7 @@ public class GameDonePanel extends JLabel {
         setText("Congrats!!! You cleared the game!!");
         setFont(new Font(Config.fontType, Font.BOLD, 30));
         setBackground(Color.red);
-        setPreferredSize(new Dimension(600, 600));
+        setPreferredSize(new Dimension(Config.gameBoardWidth, Config.gameBoardHeight));
     }
 
 }
