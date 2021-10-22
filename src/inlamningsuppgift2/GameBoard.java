@@ -58,7 +58,7 @@ public class GameBoard extends JPanel {
         for(int i = 0; i < rows; i++) {
             for(int j = 0; j < columns; j++){
                 if(i == rows-1 && j == columns-1){
-                    Tile emptyTile = new Tile(rows*columns, 3, 3);
+                    Tile emptyTile = new Tile(rows*columns, columns-1, rows-1);
                     emptyTile.setText("");
                     emptyTile.setBackground(new Color(223,212,202));
                     tiles[rows-1][columns-1] = emptyTile;
