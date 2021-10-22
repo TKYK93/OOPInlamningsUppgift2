@@ -3,6 +3,7 @@ package inlamningsuppgift2;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 public class GameBoard extends JPanel {
@@ -11,7 +12,35 @@ public class GameBoard extends JPanel {
     GameBoard() {
         setMaximumSize(new Dimension(600, 600));
         setLayout(new GridLayout(4,4));
-        initializeTiles();
+        // ----- For test only -----------
+        testForGameClearFuncInitialize();
+        // -------------------------------
+//        initializeTiles();
+    }
+
+    // For test only
+    public void testForGameClearFuncInitialize() {
+        ArrayList<Integer> listTest = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 15));
+        for(int i = 0; i < 4; i++) {
+            for(int j = 0; j < 4; j++) {
+                int tileNumber = listTest.remove(0);
+                Tile currentTile = new Tile(tileNumber, j, i);
+                if(tileNumber == 16){
+                    currentTile.setBackground(Color.red);
+                    currentTile.setText("");
+                }
+                currentTile.addActionListener(event -> {
+                    swapTiles(currentTile);
+                    boolean isGameDone = checkIsGameDone();
+                    if(isGameDone){
+                        System.out.println("Congrats!! Game is clear!!");
+                        showGameClearMessage();
+                    }
+                });
+                tiles[i][j] = currentTile;
+                add(currentTile);
+            }
+        }
     }
 
     public void initializeTiles() {
@@ -34,9 +63,15 @@ public class GameBoard extends JPanel {
                     add(emptyTile);
                     break;
                 }
-                Tile currentTile = new Tile(list.remove(0), j, i);
+
+                int tileNumber = list.remove(0);
+                Tile currentTile = new Tile(tileNumber, j, i);
                 currentTile.addActionListener(event -> {
                     swapTiles(currentTile);
+                    boolean isGameDone = checkIsGameDone();
+                    if(isGameDone){
+                        showGameClearMessage();
+                    }
                 });
                 tiles[i][j] = currentTile;
                 add(currentTile);
@@ -80,26 +115,17 @@ public class GameBoard extends JPanel {
 
         switch(direction){
             case "UP":
-                if(x == emptyX && y - 1 == emptyY){
-                    return true;
-                }
-                return false;
+                return x == emptyX && y - 1 == emptyY;
 
             case "DOWN":
-                if(x == emptyX && y + 1 == emptyY){
-                    return true;
-                }
-                return false;
+                return x == emptyX && y + 1 == emptyY;
+
             case "LEFT":
-                if(x - 1  == emptyX && y == emptyY){
-                    return true;
-                }
-                return false;
+                return x - 1  == emptyX && y == emptyY;
+
             case "RIGHT":
-                if(x + 1 == emptyX && y == emptyY){
-                    return true;
-                }
-                return false;
+                return x + 1 == emptyX && y == emptyY;
+
             default:
                 return false;
         }
@@ -137,7 +163,7 @@ public class GameBoard extends JPanel {
         return false;
     }
 
-    public boolean showIsGameDone () {
+    public boolean checkIsGameDone () {
         int[][] correctTiles = {
                 {1, 2, 3, 4},
                 {5, 6, 7, 8},
@@ -153,5 +179,12 @@ public class GameBoard extends JPanel {
             }
         }
         return true;
+    }
+
+    public void showGameClearMessage(){
+        removeAll();
+        setLayout(new BorderLayout());
+        add(new GameDonePanel());
+        revalidate();
     }
 }

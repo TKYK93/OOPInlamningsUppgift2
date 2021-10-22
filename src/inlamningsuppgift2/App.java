@@ -2,8 +2,6 @@ package inlamningsuppgift2;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collections;
 
 public class App extends JFrame {
     GameBoard gameBoardPanel = new GameBoard();
@@ -25,15 +23,14 @@ public class App extends JFrame {
         });
         this.add("North", resetButton);
 
-
         this.add("Center", gameBoardPanel);
-
 
         setVisible(true);
     }
 
     private void resetTiles(){
-        gameBoardPanel.setTiles();
+        gameBoardPanel.setLayout(new GridLayout(4,4));
+        gameBoardPanel.initializeTiles();
     }
 
 }
