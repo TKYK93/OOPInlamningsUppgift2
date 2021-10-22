@@ -6,6 +6,7 @@ import java.awt.*;
 public class App extends JFrame {
     GameBoard gameBoardPanel = new GameBoard();
     ResetButton resetButton = new ResetButton();
+    StartPanel sp = new StartPanel();
 
     App() {
         System.out.println("Start the application!");
@@ -17,9 +18,11 @@ public class App extends JFrame {
             resetTiles();
             gameBoardPanel.revalidate();
         });
-        this.add("North", resetButton);
+//        this.add("North", resetButton);
+//
+//        this.add("Center", gameBoardPanel);
 
-        this.add("Center", gameBoardPanel);
+        this.add("Center", sp);
 
         setVisible(true);
     }
