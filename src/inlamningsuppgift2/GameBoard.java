@@ -26,7 +26,7 @@ public class GameBoard extends JPanel {
                 int tileNumber = listTest.remove(0);
                 Tile currentTile = new Tile(tileNumber, j, i);
                 if(tileNumber == 16){
-                    currentTile.setBackground(Color.red);
+                    currentTile.setBackground(new Color(223,212,202));
                     currentTile.setText("");
                 }
                 currentTile.addActionListener(event -> {
@@ -57,8 +57,8 @@ public class GameBoard extends JPanel {
             for(int j = 0; j < 4; j++){
                 if(i == 3 && j == 3){
                     Tile emptyTile = new Tile(16, 3, 3);
-                    emptyTile.setBackground(Color.red);
                     emptyTile.setText("");
+                    emptyTile.setBackground(new Color(223,212,202));
                     tiles[3][3] = emptyTile;
                     add(emptyTile);
                     break;

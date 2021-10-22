@@ -1,11 +1,12 @@
 package inlamningsuppgift2;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Tile extends JButton implements ActionListener {
+public class Tile extends JButton {
     private int number;
     private int xPos;
     private int yPos;
@@ -17,7 +18,8 @@ public class Tile extends JButton implements ActionListener {
         setText("" + number);
         setFont(new Font(Config.fontType, Font.BOLD, Config.fontSize));
         setSize(new Dimension(150, 150));
-        addActionListener(this);
+        setBorder(new LineBorder(new Color(149,	112,	79)));
+        setBackground(new Color(186, 140, 99) );
     }
 
     public int getNumber() {
@@ -38,11 +40,6 @@ public class Tile extends JButton implements ActionListener {
 
     public void setYPos(int yPos) {
         this.yPos = yPos;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        System.out.println("x = " + xPos + ", y = " + yPos);
     }
 
 }
